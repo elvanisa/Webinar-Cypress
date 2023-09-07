@@ -14,4 +14,9 @@ describe('template spec', () => {
     cy.get('[data-test="login-button"]').click()
     cy.get('[data-test="error"]').should('contain.text', 'do not match')
   })
+  it('failed login - empty username', () => {
+    cy.get('[data-test="password"]').should('be.visible').type('secret_sauce')
+    cy.get('[data-test="login-button"]').click()
+    cy.get('[data-test="error"]').should('be.visible')
+  })
 })
