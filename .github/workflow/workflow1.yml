@@ -1,0 +1,36 @@
+name: Bismillah test
+on: 
+  push:
+    paths:
+    - 'cypress/e2e/file1.cy.js'
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Orange Cypress Chrome
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          spec: cypress/e2e/file1.cy.js
+      - name: Orange Cypress Electron
+        uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/file1.cy.js
+      - name: Orange Cypress Firefox
+        uses: cypress-io/github-action@v6
+        with:
+          browser: firefox
+          spec: 
+            cypress/e2e/file1.cy.js
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
