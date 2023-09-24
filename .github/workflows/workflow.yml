@@ -8,10 +8,10 @@ on:
       browser:
         description: Browser name
         type: string
-        required: true
+        required: false
       config:
         description: Config file
-        required: false
+        required: true
         type: choice
         default: "UAT.MY"
         options:
