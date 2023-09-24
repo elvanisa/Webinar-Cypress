@@ -1,13 +1,13 @@
 name: Run Manual Test
 on: 
   workflow_dispatch:
-  inputs:
-    specs: 
-      description: Comma-separates spec filenames without spaces
-      required: true
-    brow:
-      description: Browser name
-      required: true
+    inputs:
+      specs: 
+        description: Comma-separates spec filenames without spaces
+        required: true
+      brow:
+        description: Browser name
+        required: true
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
