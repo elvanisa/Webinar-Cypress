@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       specs: 
-        description: Comma-separates spec filenames without spaces
+        description: Relative Path of the file
         required: true
       brow:
         description: Browser name
