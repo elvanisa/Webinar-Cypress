@@ -1,4 +1,4 @@
-name: Bismillah test
+name: Run every 2 PM Indonesia Time
 on: 
   schedule:
   - cron: '1 7 * * *'
@@ -29,7 +29,7 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
       - uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: cypress-videos
           path: cypress/videos
