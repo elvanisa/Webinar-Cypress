@@ -1,9 +1,12 @@
-name: Run every 2 PM Indonesia Time
+name: Run Manual Test
 on: 
   workflow_dispatch:
   inputs:
     specs: 
       description: Comma-separates spec filenames without spaces
+      required: true
+    brow:
+      description: Browser name
       required: true
 jobs:
   cypress-run:
@@ -14,25 +17,5 @@ jobs:
       - name: Orange Cypress Chrome
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
-          spec: cypress/e2e/file1.cy.js
-      - name: Orange Cypress Electron
-        uses: cypress-io/github-action@v6
-        with:
-          spec: cypress/e2e/file1.cy.js
-      - name: Orange Cypress Firefox
-        uses: cypress-io/github-action@v6
-        with:
-          browser: firefox
-          spec: 
-            cypress/e2e/file1.cy.js
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-videos
-          path: cypress/videos
+          command: npx cypress run --browser ${{ github.event.inputs.brow }} --spec '${{ github.event.inputs.specs }}'
+      
