@@ -3,18 +3,27 @@ on:
   workflow_dispatch:
     inputs:
       specs: 
-        description: Relative Path of the file
+        description: Relative Path of the spec
         required: true
-      brow:
+      browser:
         description: Browser name
+        type: string
         required: true
+      config:
+        description: Config file
+        required: true
+        type: choice
+        options:
+          - "UAT.MY"
+          - "UAT.SG"
+          - "UAT.PH"
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Orange Cypress Chrome
+      - name: Cypress Regression Test
         uses: cypress-io/github-action@v6
         with:
           command: npx cypress run --browser ${{ github.event.inputs.brow }} --spec '${{ github.event.inputs.specs }}'
